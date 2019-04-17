@@ -1,17 +1,16 @@
 from tkinter import *
+from tkinter import ttk
+import random
 
+root = Tk()
+root.title("example03")
+frame = ttk.Frame(root)
+frame.grid(row=0, column=0, sticky="news")
 
-TKroot = Tk()
-TKroot.title("Hello")
-root = Frame(TKroot)
-root.place(relx = 0, rely = 0, relwidth = 1)
-root.columnconfigure(0, weight = 1)
-root.columnconfigure(1, weight = 1)
-root.rowconfigure(0, weight = 1)
-root.rowconfigure(1, weight = 1)
-btn_Add = Button(root, text="Add")
-btn_Add.grid(row=0, column=0, sticky=E+W+S+N)
-Exit = Button(root, text="Exit", command=root.quit)
-Exit.grid(row=0, column=1, sticky=E+W+S+N)
+btn_add = ttk.Button(frame, text="Add")
+btn_exit = ttk.Button(frame, text="Exit", command=root.quit)
+
+btn_add.grid(row=0, column=0, sticky="news")
+btn_exit.grid(row=0, column=1, sticky="news")
 root.mainloop()
 
