@@ -15,36 +15,36 @@ class App(Frame):
         self.master.title(Title)
         self.grid(sticky=N+E+S+W)
         self.create()
-        self.adjust()
+        
 
     def create(self):
         '''Create all the widgets'''
         self.bQuit = Button(self, text='Quit', command=self.quit)
-        self.bQuit.grid()
-
+        self.bQuit.grid(row=0, column=1)
+'''
     def adjust(self):
-        '''Adjust grid sise/properties'''
+        
         # TODO Smart detecting resizeable/still cells
         for i in range(self.size()[0]):
             self.columnconfigure(i, weight=12)
         for i in range(self.size()[1]):
             self.rowconfigure(i, weight=12)
-        
+'''
 class Paint(Canvas):
-    '''Canvas with simple drawing'''
+    
     def mousedown(self, event):
-        '''Store mousedown coords'''
+    
         self.x0, self.y0 = event.x, event.y
         self.cursor = None
 
     def mousemove(self, event):
-        '''Do sometheing when drag a mouse'''
+    
         if self.cursor:
             self.delete(self.cursor)
         self.cursor = self.create_line((self.x0, self.y0, event.x, event.y), fill=self.foreground.get())
 
     def mouseup(self, event):
-        '''Dragging is done'''
+    
         self.cursor = None
         #print(self.find_all())
 
@@ -64,14 +64,19 @@ class MyApp(App):
         self.Canvas = Paint(self, foreground="midnightblue")
         self.Canvas.grid(row=0, column=0, rowspan=3, sticky=N+E+S+W)
         self.AskColor = Button(self, text="Color", command=self.askcolor)
-        self.AskColor.grid(row=0, column=1, sticky=N+W)
+        self.AskColor.grid(row=0, column=1, sticky=W+N+S+E)
+        self.rowconfigure(0, weight=1)
         self.ShowColor = Label(self, textvariable=self.Canvas.foreground)
-        self.ShowColor.grid(row=1, column=1, sticky=N+W+E)
+        self.ShowColor.grid(row=1, column=1, sticky=W+N+S+E)
+        self.rowconfigure(1, weight=1)
         self.Quit = Button(self, text="Quit", command=self.quit)
-        self.Quit.grid(row=2, column=1, sticky=N+W)
+        self.Quit.grid(row=2, column=1, sticky=W+N+S+E)
+        self.rowconfigure(2, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
 
 app = MyApp(Title="Canvas Example")
 app.mainloop()
-for item in app.Canvas.find_all():
-    print(*app.Canvas.coords(item), app.Canvas.itemcget(item, "fill"))
+#for item in app.Canvas.find_all():
+ #   print(*app.Canvas.coords(item), app.Canvas.itemcget(item, "fill"))
 
