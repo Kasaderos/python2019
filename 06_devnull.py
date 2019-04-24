@@ -59,9 +59,11 @@ class Paint(Canvas):
 class MyApp(App):
     def askcolor(self):
         self.Canvas.foreground.set(colorchooser.askcolor()[1])
+        self.ShowColor['bg'] = self.Canvas.foreground.get()
 
     def create(self):
-        self.Canvas = Paint(self, foreground="midnightblue")
+        self.Canvas = Paint(self, foreground="black")
+        self.Canvas.foreground.set("#000000")
         self.Canvas.grid(row=0, column=0, rowspan=3, sticky=N+E+S+W)
         self.AskColor = Button(self, text="Color", command=self.askcolor)
         self.AskColor.grid(row=0, column=1, sticky=W+N+S+E)
@@ -74,7 +76,10 @@ class MyApp(App):
         self.rowconfigure(2, weight=1)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
-
+		
+        
+	
+	
 app = MyApp(Title="Canvas Example")
 app.mainloop()
 #for item in app.Canvas.find_all():
