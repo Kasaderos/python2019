@@ -25,12 +25,12 @@ class App(Frame):
         self.bQuit.grid(row=0, column=1)
 
     def config(self):
-        self.rowconfigure(2, weight=1)
+        #self.rowconfigure(2, weight=1)
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
+        #self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
         self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
+        #self.rowconfigure(1, weight=1)
 
 '''
     def adjust(self):
@@ -73,6 +73,15 @@ class MyApp(App):
         self.Canvas.foreground.set(colorchooser.askcolor()[1])
         self.ShowColor['bg'] = self.Canvas.foreground.get()
 
+    def load(self):
+        pass
+
+    def clear(self):
+        pass
+
+    def copy(self):
+        pass
+
     def create(self):
         self.Canvas = Paint(self, foreground="black")
         self.Canvas.foreground.set("#000000")
@@ -85,8 +94,14 @@ class MyApp(App):
         self.ShowColor = Label(self, textvariable=self.Canvas.foreground)
         self.ShowColor.grid(row=1, column=1, sticky=W + N + S + E)
         self.ShowColor['bg'] = self.Canvas.foreground.get()
+        self.Load = Button(self, text="Load", command=self.load)
+        self.Load.grid(row=2, column=1, sticky=W + N + S + E)
+        self.Copy = Button(self, text="CopyToRight", command=self.copy)
+        self.Copy.grid(row=3, column=1, sticky=W + N + S + E)
+        self.Clear = Button(self, text="Clear", command=self.clear)
+        self.Clear.grid(row=4, column=1, sticky=W + N + S + E)
         self.Quit = Button(self, text="Quit", command=self.quit)
-        self.Quit.grid(row=2, column=1, sticky=W + N + S + E)
+        self.Quit.grid(row=5, column=1, sticky=W + N + S + E)
 
 
 app = MyApp(Title="Canvas Example")
