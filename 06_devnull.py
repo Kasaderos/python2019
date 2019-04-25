@@ -77,7 +77,7 @@ class MyApp(App):
         pass
 
     def clear(self):
-        pass
+        self.Canvas.delete(ALL)
 
     def copy(self):
         pass
