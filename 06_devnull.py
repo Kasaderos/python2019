@@ -81,7 +81,15 @@ class MyApp(App):
         self.Canvas2.delete(ALL)
 
     def copy(self):
-        pass
+        l = set()
+        for i in self.Canvas.find_all():
+            l.add((*self.Canvas.coords(i), self.Canvas.itemcget(i, "fill")))
+        for i in self.Canvas2.find_all():
+            l.add((*self.Canvas2.coords(i), self.Canvas2.itemcget(i, "fill")))
+        self.clear()
+        for i in l:
+            self.Canvas.create_line(i[:4], fill=i[4])
+            self.Canvas2.create_line(i[:4], fill=i[4])
 
     def create(self):
         self.Canvas = Paint(self, foreground="black")
